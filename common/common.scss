@@ -310,11 +310,13 @@ body .select-kit .select-kit-header:not(.btn) {
 /* Search context button styling */
 .btn.search-context {
   background-color: var(--secondary) !important;
+  border-radius: 25px !important;
 }
 
 .btn.search-context:hover {
   background-color: var(--tertiary) !important;
   color: var(--primary) !important;
+  border-radius: 25px !important;
 }
 
 /* Category list header and date styling */
@@ -357,16 +359,19 @@ nav.custom-header-links .custom-header-dropdown .custom-header-link-icon {
 nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link:hover {
   background-color: var(--d-hover) !important;
   color: var(--primary) !important;
+  border-radius: 0 !important;
 }
 
 nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link:active {
   background-color: var(--d-selected) !important;
   color: var(--primary) !important;
+  border-radius: 0 !important;
 }
 
 nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link.selected {
   background-color: var(--d-selected) !important;
   color: var(--primary) !important;
+  border-radius: 0 !important;
 }
 
 /* Search elements removed - let theme handle all search styling */
@@ -945,6 +950,31 @@ body.categories-list .subcategories:has(a.subcategory:not(.with-subcategories)) 
 button,
 .select-kit-header {
   border-radius: 25px !important;
+}
+
+/* Force button border radius for all interactive states */
+.btn:hover,
+.btn:focus,
+.btn:active,
+button:hover,
+button:focus,
+button:active,
+.select-kit-header:hover,
+.select-kit-header:focus {
+  border-radius: 25px !important;
+}
+
+/* Force navigation and dropdown items to 0 radius */
+nav a,
+nav button,
+.nav-item,
+.dropdown-menu,
+.dropdown-menu a,
+.menu-panel,
+.menu-panel a,
+.user-menu,
+.user-menu a {
+  border-radius: 0 !important;
 }
 
 /* Light mode badge notification icons */
