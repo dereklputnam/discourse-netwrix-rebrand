@@ -1,5 +1,6 @@
 {
   "name": "Netwrix Rebrand",
+  "component": true,
   "about_url": "https://github.com/dereklputnam/discourse-netwrix-rebrand",
   "license_url": null,
   "authors": "Netwrix",
