@@ -46,3 +46,245 @@
   }
 })();
 </script>
+
+<script type="text/discourse-plugin" version="0.8">
+// Aggressively remove custom lists dropdown from navigation to prevent gaps
+const removeCustomListsDropdown = function() {
+  // Remove all custom list items from navigation
+  const customListItems = document.querySelectorAll('.category-breadcrumb li.custom-list-item, li.custom-list-item');
+  customListItems.forEach(function(item) {
+    item.parentNode.removeChild(item);
+  });
+};
+
+// Run on every page change
+api.onPageChange(function() {
+  // Remove immediately
+  removeCustomListsDropdown();
+
+  // Remove after short delays to catch late renders
+  setTimeout(removeCustomListsDropdown, 50);
+  setTimeout(removeCustomListsDropdown, 100);
+  setTimeout(removeCustomListsDropdown, 250);
+  setTimeout(removeCustomListsDropdown, 500);
+  setTimeout(removeCustomListsDropdown, 1000);
+});
+
+// Use MutationObserver to remove as soon as element is added to DOM
+document.addEventListener('DOMContentLoaded', function() {
+  const observer = new MutationObserver(function(mutations) {
+    let needsRemoval = false;
+    mutations.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(node) {
+        if (node.nodeType === 1) {
+          if (node.classList && node.classList.contains('custom-list-item')) {
+            needsRemoval = true;
+          }
+          if (node.querySelectorAll) {
+            const found = node.querySelectorAll('li.custom-list-item');
+            if (found.length > 0) {
+              needsRemoval = true;
+            }
+          }
+        }
+      });
+    });
+
+    if (needsRemoval) {
+      removeCustomListsDropdown();
+    }
+  });
+
+  // Observe the entire document body for new custom list items
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+});
+</script>
+
+<script type="text/discourse-plugin" version="0.8">
+// Nuclear approach to resize category icons on homepage and fix a.subcategory height
+const enlargeCategoryIcons = function() {
+  // Target ONLY the main category icons within the subcategory boxes (both div and a versions)
+  // Exclude lock icons and subcategory list icons
+
+  // 1. Target div-based subcategory boxes
+  const divCategoryBoxes = document.querySelectorAll('body.categories-list .subcategory.with-subcategories .category-title-link .badge-category.--style-icon');
+
+  // 2. Target a-based subcategory boxes
+  const aCategoryBoxes = document.querySelectorAll('body.categories-list a.subcategory .badge-category.--style-icon');
+
+  // Combine both into one array
+  const allCategoryBoxes = [...divCategoryBoxes, ...aCategoryBoxes];
+
+  allCategoryBoxes.forEach(function(badge) {
+    // Get all SVG icons within this badge
+    const icons = badge.querySelectorAll('svg.d-icon');
+
+    icons.forEach(function(icon) {
+      const useElement = icon.querySelector('use');
+      if (useElement) {
+        const href = useElement.getAttribute('href');
+        // Resize lock icons to 1em, other icons to 2.5em
+        if (href && (href.includes('lock') || href.includes('restricted'))) {
+          icon.style.width = '1em';
+          icon.style.height = '1em';
+          icon.style.minWidth = '1em';
+          icon.style.minHeight = '1em';
+        } else if (href) {
+          icon.style.width = '2.5em';
+          icon.style.height = '2.5em';
+          icon.style.minWidth = '2.5em';
+          icon.style.minHeight = '2.5em';
+        }
+      }
+    });
+  });
+
+  // Fix height for a.subcategory boxes to match div.subcategory boxes
+  const aSubcategoryLinks = document.querySelectorAll('body.categories-list a.subcategory:not(.with-subcategories)');
+  aSubcategoryLinks.forEach(function(link) {
+    link.style.height = '168px';
+    link.style.minHeight = '168px';
+    link.style.maxHeight = '168px';
+    link.style.overflow = 'hidden';
+  });
+};
+
+// Run on page change
+api.onPageChange(function() {
+  // Only run on categories list page
+  if (document.body.classList.contains('categories-list')) {
+    enlargeCategoryIcons();
+
+    // Run multiple times to catch late-loading icons
+    setTimeout(enlargeCategoryIcons, 100);
+    setTimeout(enlargeCategoryIcons, 300);
+    setTimeout(enlargeCategoryIcons, 500);
+    setTimeout(enlargeCategoryIcons, 1000);
+  }
+});
+
+// Also use MutationObserver to catch dynamically added icons
+api.onPageChange(function() {
+  if (!document.body.classList.contains('categories-list')) {
+    return;
+  }
+
+  const observer = new MutationObserver(function(mutations) {
+    let hasNewIcons = false;
+    mutations.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(node) {
+        if (node.nodeType === 1) {
+          if (node.classList && (node.classList.contains('d-icon') || node.classList.contains('svg-icon'))) {
+            hasNewIcons = true;
+          }
+          if (node.querySelectorAll) {
+            const icons = node.querySelectorAll('.d-icon, .svg-icon');
+            if (icons.length > 0) {
+              hasNewIcons = true;
+            }
+          }
+        }
+      });
+    });
+
+    if (hasNewIcons) {
+      enlargeCategoryIcons();
+    }
+  });
+
+  const mainContainer = document.querySelector('#main-outlet');
+  if (mainContainer) {
+    observer.observe(mainContainer, {
+      childList: true,
+      subtree: true
+    });
+  }
+});
+</script>
+
+<script type="text/discourse-plugin" version="0.8">
+// Hide square-full icons from Products categories on homepage
+// Only hides the SVG icon element - does not touch any parent containers
+
+const PRODUCT_CATEGORY_IDS = [
+  17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 32, 33, 34,
+  181, 182, 188
+];
+
+const hideProductCategoryIcons = function() {
+  // Find ALL square-full icons on the homepage first
+  const allIcons = document.querySelectorAll('body.categories-list svg.d-icon-square-full');
+
+  allIcons.forEach(function(icon) {
+    // Walk up the DOM tree to find the nearest element with data-category-id
+    let currentElement = icon.parentElement;
+    let categoryId = null;
+
+    while (currentElement && !categoryId) {
+      categoryId = currentElement.getAttribute('data-category-id');
+      if (!categoryId) {
+        currentElement = currentElement.parentElement;
+      }
+    }
+
+    // If we found a category ID and it's a product category, hide ONLY the icon
+    if (categoryId && PRODUCT_CATEGORY_IDS.includes(parseInt(categoryId))) {
+      icon.style.display = 'none';
+    }
+  });
+};
+
+// Run on page change
+api.onPageChange(function() {
+  if (document.body.classList.contains('categories-list')) {
+    hideProductCategoryIcons();
+
+    // Run multiple times to catch late-loading icons
+    setTimeout(hideProductCategoryIcons, 100);
+    setTimeout(hideProductCategoryIcons, 300);
+    setTimeout(hideProductCategoryIcons, 500);
+    setTimeout(hideProductCategoryIcons, 1000);
+  }
+});
+
+// Watch for dynamically added icons
+api.onPageChange(function() {
+  if (!document.body.classList.contains('categories-list')) {
+    return;
+  }
+
+  const observer = new MutationObserver(function(mutations) {
+    let hasNewIcons = false;
+    mutations.forEach(function(mutation) {
+      mutation.addedNodes.forEach(function(node) {
+        if (node.nodeType === 1) {
+          if (node.classList && node.classList.contains('d-icon-square-full')) {
+            hasNewIcons = true;
+          }
+          if (node.querySelectorAll) {
+            const icons = node.querySelectorAll('.d-icon-square-full');
+            if (icons.length > 0) {
+              hasNewIcons = true;
+            }
+          }
+        }
+      });
+    });
+
+    if (hasNewIcons) {
+      hideProductCategoryIcons();
+    }
+  });
+
+  const mainContainer = document.querySelector('#main-outlet');
+  if (mainContainer) {
+    observer.observe(mainContainer, {
+      childList: true,
+      subtree: true
+    });
+  }
+});
+</script>
