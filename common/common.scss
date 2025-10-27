@@ -310,13 +310,13 @@ body .select-kit .select-kit-header:not(.btn) {
 /* Search context button styling */
 .btn.search-context {
   background-color: var(--secondary) !important;
-  border-radius: 25px !important;
+  border-radius: 0 !important;
 }
 
 .btn.search-context:hover {
   background-color: var(--tertiary) !important;
   color: var(--primary) !important;
-  border-radius: 25px !important;
+  border-radius: 0 !important;
 }
 
 /* Category list header and date styling */
@@ -944,38 +944,6 @@ body.categories-list .subcategories:has(a.subcategory:not(.with-subcategories)) 
 /* ==============================
    11. UTILITY CLASSES
    ============================== */
-
-/* Force button border radius to 25px - override parent theme */
-.btn,
-button,
-.select-kit-header {
-  border-radius: 25px !important;
-}
-
-/* Force button border radius for all interactive states */
-.btn:hover,
-.btn:focus,
-.btn:active,
-button:hover,
-button:focus,
-button:active,
-.select-kit-header:hover,
-.select-kit-header:focus {
-  border-radius: 25px !important;
-}
-
-/* Force navigation and dropdown items to 0 radius */
-nav a,
-nav button,
-.nav-item,
-.dropdown-menu,
-.dropdown-menu a,
-.menu-panel,
-.menu-panel a,
-.user-menu,
-.user-menu a {
-  border-radius: 0 !important;
-}
 
 /* Light mode badge notification icons */
 html:not(.discourse-dark-theme) .badge-notification.with-icon .d-icon,
