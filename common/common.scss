@@ -111,7 +111,7 @@ body {
 .sidebar-wrapper:has(.sidebar-container) {
   border-left: 1px solid var(--primary);
   border-right: 1px solid var(--primary);
-  border-radius: 0;
+  border-radius: 0 !important;
 }
 
 .sidebar-section-wrapper .sidebar-section-header {
@@ -125,7 +125,7 @@ body {
   line-height: normal;
   background: transparent;
   border: none;
-  border-radius: 0;
+  border-radius: 0 !important;
   box-shadow: none;
 }
 
@@ -189,7 +189,7 @@ body .select-kit .select-kit-header:not(.btn) {
 
 .topic-list {
   border: 1px solid var(--primary);
-  border-radius: var(--d-border-radius);
+  border-radius: 0 !important;
   box-sizing: border-box;
   border-collapse: collapse;
 }
@@ -201,7 +201,7 @@ body .select-kit .select-kit-header:not(.btn) {
 
 .topic-list-header {
   background-color: var(--secondary);
-  border-radius: var(--d-border-radius) var(--d-border-radius) 0 0;
+  border-radius: 0 0 0 0 !important;
   overflow: hidden;
 }
 
@@ -212,7 +212,7 @@ body .select-kit .select-kit-header:not(.btn) {
 .navigation-container,
 .custom-banner {
   border: 1px solid var(--primary);
-  border-radius: var(--d-border-radius);
+  border-radius: 0 !important;
   box-sizing: border-box;
 }
 
@@ -222,7 +222,7 @@ body .select-kit .select-kit-header:not(.btn) {
 .category-boxes-with-topics .category-box {
   border: 0.5px solid var(--primary);
   border-top: 1px solid var(--primary);
-  border-radius: var(--d-border-radius);
+  border-radius: 0 !important;
   box-sizing: border-box;
   position: relative;
 }
@@ -243,7 +243,7 @@ body .select-kit .select-kit-header:not(.btn) {
   border-left: none;
   border-right: none;
   border-top: none;
-  border-radius: var(--d-border-radius);
+  border-radius: 0 !important;
   box-sizing: border-box;
   box-shadow: none !important;
   padding: 1em;
@@ -566,7 +566,7 @@ html:not(.discourse-dark-theme) a[data-clicks]::after {
   line-height: var(--line-height-small);
   font-size: var(--font-down-2);
   text-align: center;
-  border-radius: 10px;
+  border-radius: 10px !important;
   white-space: nowrap;
   display: inline-block;
   margin: .15em;
@@ -585,7 +585,7 @@ html.discourse-dark-theme a[data-clicks]::after {
   line-height: var(--line-height-small);
   font-size: var(--font-down-2);
   text-align: center;
-  border-radius: 10px;
+  border-radius: 10px !important;
   white-space: nowrap;
   display: inline-block;
   margin: .15em;
