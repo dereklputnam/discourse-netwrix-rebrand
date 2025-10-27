@@ -637,6 +637,13 @@ html.discourse-dark-theme #collapsed-info-panel dd {
   color: inherit;
 }
 
+/* Dark mode topic list header - use secondary background */
+html.discourse-dark-theme .topic-list-header,
+body.discourse-dark-theme .topic-list-header,
+.discourse-dark-theme .topic-list-header {
+  background-color: var(--secondary) !important;
+}
+
 /* Data clicks styling - use primary color in light mode */
 html:not(.discourse-dark-theme) a[data-clicks]::after {
   content: attr(data-clicks);
