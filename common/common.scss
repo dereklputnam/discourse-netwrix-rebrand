@@ -1,0 +1,967 @@
+/* ==============================
+   DISCOURSE CSS REMIX - CONSOLIDATED STYLING
+   Starting Point for Modifications
+   ============================== */
+
+/* ==============================
+   TABLE OF CONTENTS
+   ============================== */
+/*
+   1. Global Variables & Resets
+   2. Background & Theme System
+   3. Header & Navigation
+   4. Sidebar Styling
+   5. Buttons & Interactive Elements
+   6. Containers & Layout
+   7. Search Components
+   8. Typography & Text Formatting
+   9. Light Mode Enhancements
+   10. Special Components
+   11. Utility Classes
+*/
+
+/* ==============================
+   1. GLOBAL VARIABLES & RESETS
+   ============================== */
+
+:root {
+  /* Border radius settings - configurable */
+  --d-border-radius: 0px;
+  --d-button-border-radius: 25px;
+
+  /* Grid background images */
+  --grid-image: url("https://nwx-discourse-d8fdaffeajbbc8a5.a01.azurefd.net/discourseimages/19459efc-5554-429b-980a-d00d16b37330.png");
+  --grid-image-width: 600px;
+
+  /* Color system - RGB values for gradients */
+  --tertiary-rgb: 88, 81, 219; /* Purple for light mode */
+  --quaternary-rgb: 88, 81, 219; /* Purple accent */
+
+  /* Light purple variations for subtle backgrounds */
+  --light-purple-10: rgba(88, 81, 219, 0.03);
+  --light-purple-20: rgba(88, 81, 219, 0.05);
+  --light-purple-30: rgba(88, 81, 219, 0.08);
+  --light-purple-40: rgba(88, 81, 219, 0.12);
+
+  /* Access White variations */
+  --access-white-soft: rgba(252, 250, 245, 0.9);
+  --access-white-medium: rgba(252, 250, 245, 0.7);
+  --access-white-light: rgba(252, 250, 245, 0.5);
+
+  /* Let theme handle sidebar, navigation, and link colors naturally */
+}
+
+/* ==============================
+   2. BACKGROUND & THEME SYSTEM
+   ============================== */
+
+/* Light mode background system - original treatment */
+:root {
+  --d-general-background:
+    var(--grid-image),
+    radial-gradient(
+      circle at 90% -15%,
+      rgba(var(--tertiary-rgb), 0.25) 5%,
+      rgba(var(--tertiary-rgb), 0.12) 12%,
+      rgba(var(--tertiary-rgb), 0.04) 18%,
+      rgba(255, 255, 255, 0) 22%
+    ),
+    var(--secondary);
+}
+
+/* Apply background globally */
+html,
+body {
+  background: var(--d-general-background) !important;
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: top right, top right, center;
+  background-size:
+    var(--grid-image-width) auto,
+    100% 100%,
+    auto;
+  background-attachment: fixed, fixed, scroll;
+  transition: none !important;
+}
+
+/* Keep Discourse containers transparent */
+.wrap,
+#main-outlet {
+  background: transparent !important;
+}
+
+/* ==============================
+   3. HEADER & NAVIGATION
+   ============================== */
+
+.d-header {
+  border-top: none !important;
+  border-bottom: 1px solid var(--primary);
+  box-shadow: none !important;
+  background: var(--header_background, var(--secondary));
+}
+
+/* ==============================
+   4. SIDEBAR STYLING
+   ============================== */
+
+.sidebar-wrapper {
+  border: none;
+}
+
+.sidebar-wrapper:has(.sidebar-container) {
+  border-left: 1px solid var(--primary);
+  border-right: 1px solid var(--primary);
+  border-radius: 0;
+}
+
+.sidebar-section-wrapper .sidebar-section-header {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  padding: 0;
+  font-weight: var(--d-sidebar-header-font-weight);
+  letter-spacing: normal !important;
+  text-transform: none !important;
+  line-height: normal;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Let theme handle sidebar hover colors naturally */
+
+/* ==============================
+   5. BUTTONS & INTERACTIVE ELEMENTS
+   ============================== */
+
+/* Buttons with original styling */
+body .btn.btn-default:not(.btn-text),
+body .select-kit .select-kit-header:not(.btn) {
+  border: 1px solid var(--primary) !important;
+  border-radius: var(--d-button-border-radius);
+  box-sizing: border-box;
+  background-color: var(--secondary);
+}
+
+.btn-primary {
+  background-color: var(--tertiary);
+  color: var(--secondary);
+  border: 1px solid var(--primary);
+  border-radius: var(--d-button-border-radius);
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--tertiary-hover) !important;
+  border: 1px solid var(--primary) !important;
+  color: var(--secondary) !important;
+  border-radius: var(--d-button-border-radius);
+}
+
+.btn-primary:hover .d-icon,
+.btn-primary:focus .d-icon {
+  color: var(--secondary) !important;
+  fill: var(--secondary) !important;
+}
+
+/* Special styling for "All categories" button */
+.btn-primary.btn-all-categories,
+.category-breadcrumb .btn-primary {
+  background-color: var(--danger) !important;
+  color: var(--secondary) !important;
+}
+
+.btn-primary.btn-all-categories:hover,
+.category-breadcrumb .btn-primary:hover {
+  background-color: var(--danger-hover) !important;
+  color: var(--secondary) !important;
+}
+
+/* Override specific button styling - background-color removed to use theme defaults */
+.btn-view-topic {
+  border-radius: var(--d-button-border-radius);
+}
+
+/* ==============================
+   6. CONTAINERS & LAYOUT
+   ============================== */
+
+.topic-list {
+  border: 1px solid var(--primary);
+  border-radius: var(--d-border-radius);
+  box-sizing: border-box;
+  border-collapse: collapse;
+}
+
+.topic-list th,
+.topic-list td {
+  border-bottom: 1px solid var(--primary-low);
+}
+
+.topic-list-header {
+  background-color: var(--secondary);
+  border-radius: var(--d-border-radius) var(--d-border-radius) 0 0;
+  overflow: hidden;
+}
+
+.topic-list tbody:last-of-type tr:last-of-type td {
+  border-bottom: 1px solid var(--primary);
+}
+
+.navigation-container,
+.custom-banner {
+  border: 1px solid var(--primary);
+  border-radius: var(--d-border-radius);
+  box-sizing: border-box;
+}
+
+.category-box,
+.category-box-inner,
+.category-boxes .category-box,
+.category-boxes-with-topics .category-box {
+  border: 0.5px solid var(--primary);
+  border-top: 1px solid var(--primary);
+  border-radius: var(--d-border-radius);
+  box-sizing: border-box;
+  position: relative;
+}
+
+.category-box::before {
+  content: "";
+  display: block;
+  height: var(--d-category-accent-height, 4px);
+  background-color: var(--category-badge-color, var(--primary));
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.post__body.topic-body.clearfix {
+  border-bottom: 1px solid var(--primary);
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: var(--d-border-radius);
+  box-sizing: border-box;
+  box-shadow: none !important;
+  padding: 1em;
+}
+
+/* Remove top border from consecutive posts */
+.topic-post:not(:first-child) .post__body.topic-body.clearfix {
+  border-top: none;
+}
+
+.topic-post::after {
+  display: none;
+}
+
+#topic-title.container {
+  border-bottom: 1px solid var(--primary);
+  margin-bottom: 1em;
+}
+
+/* ==============================
+   7. SEARCH COMPONENTS
+   ============================== */
+
+.welcome-banner__search-menu .search-input.search-input--welcome-banner,
+.search-banner .search-input.search-input--header,
+.search-menu .search-input {
+  border: 1px solid var(--primary) !important;
+  border-radius: 0 !important;
+  background: var(--secondary) !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.welcome-banner__search-menu .search-input .search-term__input,
+.search-banner .search-input .search-term__input,
+.search-menu .search-input .search-term__input {
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.welcome-banner__search-menu .search-input:hover,
+.welcome-banner__search-menu .search-input:focus-within,
+.search-banner .search-input:hover,
+.search-banner .search-input:focus-within,
+.search-menu .search-input:hover,
+.search-menu .search-input:focus-within {
+  border-color: var(--primary) !important;
+  box-shadow: none !important;
+}
+
+.welcome-banner__search-menu .search-icon.btn,
+.welcome-banner__search-menu .show-advanced-search.btn,
+.search-banner .search-icon.btn,
+.search-banner .show-advanced-search.btn {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+
+/* Search context button styling */
+.btn.search-context {
+  background-color: var(--secondary) !important;
+}
+
+.btn.search-context:hover {
+  background-color: var(--tertiary) !important;
+  color: var(--primary) !important;
+}
+
+/* Category list header and date styling */
+.category-list th.latest,
+.category-list .relative-date {
+  color: var(--primary-low) !important;
+}
+
+/* Search link styling - use tertiary color in light mode */
+html:not(.discourse-dark-theme) a[href="#"],
+html:not(.discourse-dark-theme) a.search-link,
+html:not(.discourse-dark-theme) .search-link {
+  color: var(--tertiary) !important;
+  border-radius: 0px !important;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .2s ease;
+  margin-top: .5em;
+}
+
+/* Dark mode keeps white color */
+html.discourse-dark-theme a[href="#"],
+html.discourse-dark-theme a.search-link,
+html.discourse-dark-theme .search-link {
+  color: #fff !important;
+  border-radius: 0px !important;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color .2s ease;
+  margin-top: .5em;
+}
+
+/* Custom header elements - use site's built-in color profiles */
+nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link,
+nav.custom-header-links .custom-header-dropdown .custom-header-link-title,
+nav.custom-header-links .custom-header-dropdown .custom-header-link-icon {
+  color: var(--primary) !important;
+}
+
+nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link:hover {
+  background-color: var(--d-hover) !important;
+  color: var(--primary) !important;
+}
+
+nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link:active {
+  background-color: var(--d-selected) !important;
+  color: var(--primary) !important;
+}
+
+nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link.selected {
+  background-color: var(--d-selected) !important;
+  color: var(--primary) !important;
+}
+
+/* Search elements removed - let theme handle all search styling */
+
+/* ==============================
+   8. TYPOGRAPHY & TEXT FORMATTING
+   ============================== */
+
+/* Ensure text formatting visibility */
+strong, b, .bold,
+.cooked strong, .cooked b,
+.post-body strong, .post-body b,
+.topic-body strong, .topic-body b {
+  font-weight: bold !important;
+  color: var(--primary) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+em, i, .italic,
+.cooked em, .cooked i,
+.post-body em, .post-body i,
+.topic-body em, .topic-body i {
+  font-style: italic !important;
+  color: var(--primary) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+u, .underline,
+.cooked u, .post-body u, .topic-body u {
+  text-decoration: underline !important;
+  color: var(--primary) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+.cooked, .post-body, .topic-body {
+  color: var(--primary) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Gap styling */
+.gap {
+  color: var(--primary-600);
+}
+
+/* Avatar borders */
+.avatar,
+img.avatar {
+  border: 1px solid var(--primary);
+  box-sizing: border-box;
+}
+
+/* ==============================
+   9. DARK MODE OVERRIDES
+   ============================== */
+
+html.discourse-dark-theme,
+body.discourse-dark-theme,
+.discourse-dark-theme {
+  --grid-image: url("https://nwx-discourse-d8fdaffeajbbc8a5.a01.azurefd.net/discourseimages/3bd3343b-3c4a-41a6-b900-d0c46f830900.png") !important;
+  --tertiary-rgb: 65, 242, 39 !important;
+  --quaternary-rgb: 88, 81, 219 !important;
+
+  --d-general-background:
+    var(--grid-image),
+    radial-gradient(
+      circle at 90% -15%,
+      rgba(var(--tertiary-rgb), 0.8) 5%,
+      rgba(var(--tertiary-rgb), 0.4) 12%,
+      rgba(var(--quaternary-rgb), 0.3) 18%,
+      rgba(0, 0, 0, 0) 30%
+    ),
+    var(--secondary) !important;
+
+  /* Access White brand-approved colors for dark mode */
+  --primary-very-low: #979693 !important;
+  --primary-low: #B0AFAB !important;
+  --primary-low-mid: #CAC8C4 !important;
+  --primary-medium: #CAC8C4 !important;
+  --primary-high: #FCFAF5 !important;
+  --primary-very-high: #FCFAF5 !important;
+
+  --secondary-very-low: #1a1a1a !important;
+  --secondary-low: #2a2a2a !important;
+  --secondary-medium: #3a3a3a !important;
+  --secondary-high: #4a4a4a !important;
+  --secondary-very-high: #5a5a5a !important;
+
+  --header_background: var(--secondary) !important;
+  --header_primary: var(--primary) !important;
+
+  --primary-low-rgb: 176, 175, 171 !important;
+  --primary-very-low-rgb: 151, 150, 147 !important;
+
+  /* Numbered variations */
+  --primary-50: #979693 !important;
+  --primary-100: #FCFAF5 !important;
+  --primary-200: #E2E1DC !important;
+  --primary-300: #CAC8C4 !important;
+  --primary-400: #B0AFAB !important;
+  --primary-500: #979693 !important;
+  --primary-600: #B0AFAB !important;
+  --primary-700: #FCFAF5 !important;
+  --primary-800: #FCFAF5 !important;
+  --primary-900: #FCFAF5 !important;
+}
+
+/* Dark mode tag styling */
+html.discourse-dark-theme .discourse-tag,
+body.discourse-dark-theme .discourse-tag,
+.discourse-dark-theme .discourse-tag,
+html.discourse-dark-theme .discourse-tag-box,
+body.discourse-dark-theme .discourse-tag-box,
+.discourse-dark-theme .discourse-tag-box {
+  color: var(--secondary) !important;
+}
+
+/* Dark mode tag styling for tags with box class */
+html.discourse-dark-theme .discourse-tag.box,
+body.discourse-dark-theme .discourse-tag.box,
+.discourse-dark-theme .discourse-tag.box {
+  color: var(--secondary) !important;
+}
+
+/* Dark mode extra-info-wrapper tag styling */
+html.discourse-dark-theme .extra-info-wrapper .discourse-tag.box,
+body.discourse-dark-theme .extra-info-wrapper .discourse-tag.box,
+.discourse-dark-theme .extra-info-wrapper .discourse-tag.box {
+  background-color: var(--primary-low) !important;
+}
+
+/* Dark mode mention styling */
+html.discourse-dark-theme .mention-group,
+body.discourse-dark-theme .mention-group,
+.discourse-dark-theme .mention-group,
+html.discourse-dark-theme .mention,
+body.discourse-dark-theme .mention,
+.discourse-dark-theme .mention {
+  background-color: var(--primary-low) !important;
+  color: var(--secondary) !important;
+}
+
+/* Dark mode badge styling */
+html.discourse-dark-theme .badge-notification.new-posts,
+body.discourse-dark-theme .badge-notification.new-posts,
+.discourse-dark-theme .badge-notification.new-posts,
+html.discourse-dark-theme .badge-notification.highlighted,
+body.discourse-dark-theme .badge-notification.highlighted,
+.discourse-dark-theme .badge-notification.highlighted {
+  background-color: var(--quaternary) !important;
+  color: #ffffff !important;
+}
+
+/* Dark mode code blocks */
+html.discourse-dark-theme pre,
+body.discourse-dark-theme pre,
+.discourse-dark-theme pre,
+html.discourse-dark-theme code,
+body.discourse-dark-theme code,
+.discourse-dark-theme code,
+html.discourse-dark-theme .hljs,
+body.discourse-dark-theme .hljs,
+.discourse-dark-theme .hljs {
+  background-color: var(--secondary-low) !important;
+  color: var(--primary) !important;
+}
+
+/* User profile secondary stats styling - use tertiary color in light mode */
+html:not(.discourse-dark-theme) .secondary dt,
+html:not(.discourse-dark-theme) .secondary dd,
+html:not(.discourse-dark-theme) #collapsed-info-panel dt,
+html:not(.discourse-dark-theme) #collapsed-info-panel dd {
+  color: var(--tertiary) !important;
+}
+
+/* Dark mode keeps default colors */
+html.discourse-dark-theme .secondary dt,
+html.discourse-dark-theme .secondary dd,
+html.discourse-dark-theme #collapsed-info-panel dt,
+html.discourse-dark-theme #collapsed-info-panel dd {
+  color: inherit;
+}
+
+/* Data clicks styling - use primary color in light mode */
+html:not(.discourse-dark-theme) a[data-clicks]::after {
+  content: attr(data-clicks);
+  font-weight: normal;
+  background-color: var(--primary-low);
+  color: var(--primary);
+  position: relative;
+  top: -1px;
+  padding: .21em .42em;
+  min-width: .5em;
+  line-height: var(--line-height-small);
+  font-size: var(--font-down-2);
+  text-align: center;
+  border-radius: 10px;
+  white-space: nowrap;
+  display: inline-block;
+  margin: .15em;
+}
+
+/* Dark mode keeps secondary color */
+html.discourse-dark-theme a[data-clicks]::after {
+  content: attr(data-clicks);
+  font-weight: normal;
+  background-color: var(--primary-low);
+  color: var(--secondary);
+  position: relative;
+  top: -1px;
+  padding: .21em .42em;
+  min-width: .5em;
+  line-height: var(--line-height-small);
+  font-size: var(--font-down-2);
+  text-align: center;
+  border-radius: 10px;
+  white-space: nowrap;
+  display: inline-block;
+  margin: .15em;
+}
+
+/* ==============================
+   9. LIGHT MODE - ORIGINAL BACKGROUND TREATMENT
+   ============================== */
+
+/* Light mode uses the original grid image and gradient system defined in :root */
+/* No additional overrides needed - let the original background system handle light mode */
+
+/* Light mode specific mention styling - uses mention background color variable with primary text */
+html:not(.discourse-dark-theme) .mention-group,
+body:not(.discourse-dark-theme) .mention-group,
+html:not(.discourse-dark-theme) .mention-group a,
+body:not(.discourse-dark-theme) .mention-group a,
+html:not(.discourse-dark-theme) a.mention-group,
+body:not(.discourse-dark-theme) a.mention-group,
+html:not(.discourse-dark-theme) span.mention-group,
+body:not(.discourse-dark-theme) span.mention-group {
+  background-color: var(--mention-background-color) !important;
+  color: var(--primary) !important;
+}
+
+html:not(.discourse-dark-theme) .mention,
+body:not(.discourse-dark-theme) .mention,
+html:not(.discourse-dark-theme) a.mention,
+body:not(.discourse-dark-theme) a.mention,
+html:not(.discourse-dark-theme) span.mention,
+body:not(.discourse-dark-theme) span.mention {
+  background-color: var(--mention-background-color) !important;
+  color: var(--primary) !important;
+}
+
+/* ==============================
+   10. SPECIAL COMPONENTS
+   ============================== */
+
+/* Category list modifications */
+.category-list .topics .value,
+.category-list .topics span.value,
+.category-list .stat span.value,
+.category-list th .stat .value {
+  display: none !important;
+}
+
+.category-list th.topics {
+  display: none !important;
+}
+
+.category-list td.topics {
+  display: none !important;
+}
+
+.category-list th.latest {
+  padding-left: 15px !important;
+}
+
+/* Post notice positioning */
+.post-notice.returning-user,
+.post-notice.new-user {
+  position: relative;
+  margin-bottom: 0.5rem !important;
+  margin-top: 1rem !important;
+  order: -1;
+  z-index: 10;
+}
+
+.topic-post:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Homepage category styling - remove borders and backgrounds from parent categories */
+body.categories-list .category-box,
+body.categories-list .category-box-inner,
+body.categories-list .category.category-box > .category-box-inner {
+  border: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Remove colored bars from parent categories - target the heading/title area */
+body.categories-list .category.category-box .category-box-heading,
+body.categories-list .category.category-box .parent-box-link {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Hide ::before stripe from parent categories on homepage */
+body.categories-list .category.category-box::before,
+body.categories-list div.category.category-box::before,
+body.categories-list div[class*="category-box"]::before,
+body.categories-list .category-box::before,
+body.categories-list div.category-box::before,
+body.categories-list .category-box-heading::before,
+body.categories-list .parent-box-link::before {
+  display: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  height: 0 !important;
+  content: none !important;
+}
+
+/* Add white borders to div-based subcategory boxes on homepage */
+body.categories-list .subcategory.with-subcategories {
+  border-width: 1px !important;
+  border-style: solid !important;
+  border-color: var(--primary);
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+  margin: 0 !important;
+  display: block !important;
+  padding: 1em !important;
+  padding-top: calc(1em + 8px) !important;
+  position: relative !important;
+  box-shadow: none !important;
+}
+
+/* Override sides to stay white, allowing inline style to set border-color which ::before will inherit */
+body.categories-list .subcategory.with-subcategories[style*="border-color"] {
+  border-left-color: var(--primary) !important;
+  border-right-color: var(--primary) !important;
+  border-bottom-color: var(--primary) !important;
+}
+
+/* Create white 1px line at top using box-shadow, it won't block the colored bar */
+body.categories-list .subcategory.with-subcategories[style*="border-color"] {
+  border-top-color: var(--primary) !important;
+}
+
+/* Add colored bar using ::before pseudo-element - flush with top border */
+/* Generic base styling for all categories */
+body.categories-list .subcategory.with-subcategories::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 8px !important;
+  box-sizing: border-box !important;
+}
+
+/* Category-specific colors using data-category-id attribute */
+body.categories-list .subcategory.with-subcategories[data-category-id="163"]::before { background: var(--category-163-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="164"]::before { background: var(--category-164-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="165"]::before { background: var(--category-165-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="166"]::before { background: var(--category-166-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="229"]::before { background: var(--category-229-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="214"]::before { background: var(--category-214-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="1"]::before { background: var(--category-1-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="169"]::before { background: var(--category-169-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="213"]::before { background: var(--category-213-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="171"]::before { background: var(--category-171-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="215"]::before { background: var(--category-215-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="179"]::before { background: var(--category-179-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="173"]::before { background: var(--category-173-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="170"]::before { background: var(--category-170-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="218"]::before { background: var(--category-218-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="219"]::before { background: var(--category-219-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="220"]::before { background: var(--category-220-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="221"]::before { background: var(--category-221-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="176"]::before { background: var(--category-176-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="177"]::before { background: var(--category-177-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="178"]::before { background: var(--category-178-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="180"]::before { background: var(--category-180-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="217"]::before { background: var(--category-217-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="17"]::before { background: var(--category-17-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="193"]::before { background: var(--category-193-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="161"]::before { background: var(--category-161-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="87"]::before { background: var(--category-87-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="88"]::before { background: var(--category-88-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="89"]::before { background: var(--category-89-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="19"]::before { background: var(--category-19-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="197"]::before { background: var(--category-197-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="94"]::before { background: var(--category-94-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="95"]::before { background: var(--category-95-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="96"]::before { background: var(--category-96-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="97"]::before { background: var(--category-97-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="188"]::before { background: var(--category-188-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="194"]::before { background: var(--category-194-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="189"]::before { background: var(--category-189-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="190"]::before { background: var(--category-190-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="191"]::before { background: var(--category-191-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="192"]::before { background: var(--category-192-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="234"]::before { background: var(--category-234-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="18"]::before { background: var(--category-18-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="195"]::before { background: var(--category-195-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="90"]::before { background: var(--category-90-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="91"]::before { background: var(--category-91-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="92"]::before { background: var(--category-92-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="93"]::before { background: var(--category-93-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="20"]::before { background: var(--category-20-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="198"]::before { background: var(--category-198-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="98"]::before { background: var(--category-98-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="99"]::before { background: var(--category-99-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="100"]::before { background: var(--category-100-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="101"]::before { background: var(--category-101-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="21"]::before { background: var(--category-21-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="200"]::before { background: var(--category-200-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="102"]::before { background: var(--category-102-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="103"]::before { background: var(--category-103-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="104"]::before { background: var(--category-104-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="105"]::before { background: var(--category-105-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="23"]::before { background: var(--category-23-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="204"]::before { background: var(--category-204-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="110"]::before { background: var(--category-110-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="111"]::before { background: var(--category-111-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="112"]::before { background: var(--category-112-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="113"]::before { background: var(--category-113-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="28"]::before { background: var(--category-28-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="208"]::before { background: var(--category-208-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="130"]::before { background: var(--category-130-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="131"]::before { background: var(--category-131-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="132"]::before { background: var(--category-132-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="133"]::before { background: var(--category-133-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="22"]::before { background: var(--category-22-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="202"]::before { background: var(--category-202-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="106"]::before { background: var(--category-106-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="107"]::before { background: var(--category-107-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="108"]::before { background: var(--category-108-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="109"]::before { background: var(--category-109-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="34"]::before { background: var(--category-34-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="196"]::before { background: var(--category-196-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="150"]::before { background: var(--category-150-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="151"]::before { background: var(--category-151-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="152"]::before { background: var(--category-152-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="153"]::before { background: var(--category-153-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="187"]::before { background: var(--category-187-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="25"]::before { background: var(--category-25-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="210"]::before { background: var(--category-210-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="118"]::before { background: var(--category-118-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="119"]::before { background: var(--category-119-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="120"]::before { background: var(--category-120-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="121"]::before { background: var(--category-121-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="26"]::before { background: var(--category-26-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="211"]::before { background: var(--category-211-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="122"]::before { background: var(--category-122-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="123"]::before { background: var(--category-123-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="124"]::before { background: var(--category-124-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="125"]::before { background: var(--category-125-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="27"]::before { background: var(--category-27-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="209"]::before { background: var(--category-209-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="126"]::before { background: var(--category-126-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="127"]::before { background: var(--category-127-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="128"]::before { background: var(--category-128-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="129"]::before { background: var(--category-129-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="181"]::before { background: var(--category-181-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="203"]::before { background: var(--category-203-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="142"]::before { background: var(--category-142-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="143"]::before { background: var(--category-143-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="144"]::before { background: var(--category-144-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="145"]::before { background: var(--category-145-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="182"]::before { background: var(--category-182-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="205"]::before { background: var(--category-205-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="183"]::before { background: var(--category-183-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="184"]::before { background: var(--category-184-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="185"]::before { background: var(--category-185-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="186"]::before { background: var(--category-186-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="29"]::before { background: var(--category-29-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="207"]::before { background: var(--category-207-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="134"]::before { background: var(--category-134-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="135"]::before { background: var(--category-135-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="136"]::before { background: var(--category-136-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="137"]::before { background: var(--category-137-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="233"]::before { background: var(--category-233-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="30"]::before { background: var(--category-30-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="206"]::before { background: var(--category-206-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="138"]::before { background: var(--category-138-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="139"]::before { background: var(--category-139-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="140"]::before { background: var(--category-140-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="141"]::before { background: var(--category-141-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="32"]::before { background: var(--category-32-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="201"]::before { background: var(--category-201-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="162"]::before { background: var(--category-162-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="157"]::before { background: var(--category-157-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="158"]::before { background: var(--category-158-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="159"]::before { background: var(--category-159-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="33"]::before { background: var(--category-33-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="199"]::before { background: var(--category-199-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="160"]::before { background: var(--category-160-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="147"]::before { background: var(--category-147-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="148"]::before { background: var(--category-148-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="149"]::before { background: var(--category-149-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="231"]::before { background: var(--category-231-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="232"]::before { background: var(--category-232-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="3"]::before { background: var(--category-3-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="167"]::before { background: var(--category-167-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="168"]::before { background: var(--category-168-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="230"]::before { background: var(--category-230-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="235"]::before { background: var(--category-235-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="236"]::before { background: var(--category-236-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="241"]::before { background: var(--category-241-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="238"]::before { background: var(--category-238-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="239"]::before { background: var(--category-239-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="240"]::before { background: var(--category-240-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="237"]::before { background: var(--category-237-color) !important; }
+body.categories-list .subcategory.with-subcategories[data-category-id="242"]::before { background: var(--category-242-color) !important; }
+
+/* Add white borders to link-based subcategory boxes on homepage */
+body.categories-list a.subcategory:not(.with-subcategories) {
+  border: 1px solid var(--primary) !important;
+  border-radius: 0 !important;
+  box-sizing: border-box !important;
+  height: 140px !important;
+  display: block !important;
+}
+
+/* Style badge wrapper in link-based subcategories */
+body.categories-list a.subcategory:not(.with-subcategories) .badge-category__wrapper {
+  padding: 1em !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+/* Style the badge category content */
+body.categories-list a.subcategory:not(.with-subcategories) .badge-category {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 1em 0 !important;
+}
+
+/* Add spacing around icons */
+body.categories-list a.subcategory:not(.with-subcategories) .badge-category .d-icon {
+  margin-top: 0 !important;
+  margin-bottom: 0.5em !important;
+}
+
+/* Center the category name text with bottom margin - no bold */
+body.categories-list a.subcategory:not(.with-subcategories) .badge-category__name {
+  display: block !important;
+  text-align: center !important;
+  font-weight: normal !important;
+  margin-bottom: 1em !important;
+}
+
+/* Override any parent container styling */
+body.categories-list .subcategories {
+  border: none !important;
+}
+
+/* Add top margin to subcategories container when it contains link-based subcategories */
+body.categories-list .subcategories:has(a.subcategory:not(.with-subcategories)) {
+  margin-top: 1.5em !important;
+}
+
+/* ==============================
+   11. UTILITY CLASSES
+   ============================== */
+
+/* Light mode badge notification icons */
+html:not(.discourse-dark-theme) .badge-notification.with-icon .d-icon,
+body:not(.discourse-dark-theme) .badge-notification.with-icon .d-icon,
+html:not(.discourse-dark-theme) .badge-notification.with-icon svg,
+body:not(.discourse-dark-theme) .badge-notification.with-icon svg {
+  color: var(--secondary) !important;
+  fill: var(--secondary) !important;
+}
+
+/* CSS-only dark mode detection fallbacks */
+:root[style*="--scheme-type: dark"],
+:root[style*="--color-scheme: dark"] {
+  --d-general-background:
+    url("https://nwx-discourse-d8fdaffeajbbc8a5.a01.azurefd.net/discourseimages/3bd3343b-3c4a-41a6-b900-d0c46f830900.png"),
+    radial-gradient(
+      circle at 90% -15%,
+      rgba(65, 242, 39, 0.25) 5%,
+      rgba(0, 0, 0, 0) 20%
+    ),
+    var(--secondary) !important;
+}
+
+/* ==============================
+   END DISCOURSE CSS REMIX
+   ============================== */

@@ -1,0 +1,48 @@
+<script>
+(function() {
+  function checkDarkMode() {
+    const rootStyle = getComputedStyle(document.documentElement);
+    const schemeType = rootStyle.getPropertyValue('--scheme-type').trim();
+    const colorScheme = rootStyle.getPropertyValue('--color-scheme').trim();
+
+    if (schemeType === 'dark' || colorScheme === 'dark') {
+      document.documentElement.classList.add('discourse-dark-theme');
+      document.body.classList.add('discourse-dark-theme');
+    } else {
+      document.documentElement.classList.remove('discourse-dark-theme');
+      document.body.classList.remove('discourse-dark-theme');
+    }
+  }
+
+  // Check on load
+  checkDarkMode();
+
+  // Keep the safe 500ms polling interval
+  setInterval(checkDarkMode, 50);
+
+  // Check on theme changes (if Discourse fires events)
+  document.addEventListener('DOMContentLoaded', checkDarkMode);
+  window.addEventListener('load', checkDarkMode);
+
+  // Add MutationObserver for immediate detection of style changes
+  if (window.MutationObserver) {
+    const observer = new MutationObserver(function(mutations) {
+      let shouldCheck = false;
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'style') {
+          shouldCheck = true;
+        }
+      });
+      if (shouldCheck) {
+        checkDarkMode();
+      }
+    });
+
+    // Only observe the root element for style changes
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['style']
+    });
+  }
+})();
+</script>
