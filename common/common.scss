@@ -139,7 +139,7 @@ body {
 body .btn.btn-default:not(.btn-text),
 body .select-kit .select-kit-header:not(.btn) {
   border: 1px solid var(--primary) !important;
-  border-radius: var(--d-button-border-radius);
+  border-radius: 25px !important;
   box-sizing: border-box;
   background-color: var(--secondary);
 }
@@ -148,7 +148,7 @@ body .select-kit .select-kit-header:not(.btn) {
   background-color: var(--tertiary);
   color: var(--secondary);
   border: 1px solid var(--primary);
-  border-radius: var(--d-button-border-radius);
+  border-radius: 25px !important;
 }
 
 .btn-primary:hover,
@@ -156,7 +156,7 @@ body .select-kit .select-kit-header:not(.btn) {
   background-color: var(--tertiary-hover) !important;
   border: 1px solid var(--primary) !important;
   color: var(--secondary) !important;
-  border-radius: var(--d-button-border-radius);
+  border-radius: 25px !important;
 }
 
 .btn-primary:hover .d-icon,
@@ -180,7 +180,7 @@ body .select-kit .select-kit-header:not(.btn) {
 
 /* Override specific button styling - background-color removed to use theme defaults */
 .btn-view-topic {
-  border-radius: var(--d-button-border-radius);
+  border-radius: 25px !important;
 }
 
 /* ==============================
@@ -939,6 +939,13 @@ body.categories-list .subcategories:has(a.subcategory:not(.with-subcategories)) 
 /* ==============================
    11. UTILITY CLASSES
    ============================== */
+
+/* Force button border radius to 25px - override parent theme */
+.btn,
+button,
+.select-kit-header {
+  border-radius: 25px !important;
+}
 
 /* Light mode badge notification icons */
 html:not(.discourse-dark-theme) .badge-notification.with-icon .d-icon,
