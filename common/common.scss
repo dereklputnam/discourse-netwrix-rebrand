@@ -429,9 +429,10 @@ nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link.sel
 
 /* Force dropdown containers and floating menus to have 0 border radius */
 .fk-d-menu,
+.fk-d-menu__inner-content,
 .d-header-wrap .drop-down,
-.ember-view.drop-down,
-nav .drop-down {
+nav .drop-down,
+.custom-header-dropdown {
   border-radius: 0 !important;
 }
 
