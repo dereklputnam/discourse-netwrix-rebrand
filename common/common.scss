@@ -129,6 +129,25 @@ body {
   box-shadow: none;
 }
 
+/* Force sidebar links to have 0 border radius */
+.sidebar-section-link,
+.sidebar-section-link-wrapper,
+.sidebar-row,
+a.sidebar-section-link {
+  border-radius: 0 !important;
+}
+
+.sidebar-section-link:hover,
+.sidebar-section-link:focus,
+.sidebar-section-link:active,
+.sidebar-section-link.active,
+a.sidebar-section-link:hover,
+a.sidebar-section-link:focus,
+a.sidebar-section-link:active,
+a.sidebar-section-link.active {
+  border-radius: 0 !important;
+}
+
 /* Let theme handle sidebar hover colors naturally */
 
 /* ==============================
