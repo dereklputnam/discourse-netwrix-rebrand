@@ -393,6 +393,57 @@ nav.custom-header-links .custom-header-dropdown .custom-header-dropdown-link.sel
   border-radius: 0 !important;
 }
 
+/* User menu tabs - force 0 border radius */
+.user-menu-tab,
+.user-menu-tab.active,
+.user-menu-tab:hover,
+.user-menu-tab:focus,
+.user-menu-tab:active {
+  border-radius: 0 !important;
+}
+
+/* User menu profile buttons - force 0 border radius */
+.profile-tab-btn,
+.profile-tab-btn:hover,
+.profile-tab-btn:focus,
+.profile-tab-btn:active {
+  border-radius: 0 !important;
+}
+
+/* Dropdown menu items - force 0 border radius */
+.dropdown-menu,
+.dropdown-menu__item,
+.dropdown-menu__item a,
+.dropdown-menu__item button,
+.dropdown-menu__item .sidebar-section-link,
+.dropdown-menu__item .sidebar-row {
+  border-radius: 0 !important;
+}
+
+.dropdown-menu__item a:hover,
+.dropdown-menu__item button:hover,
+.dropdown-menu__item .sidebar-section-link:hover,
+.dropdown-menu__item .sidebar-row:hover {
+  border-radius: 0 !important;
+}
+
+/* Menu panel items - force 0 border radius */
+.menu-panel,
+.menu-panel a,
+.menu-panel button,
+.menu-panel .quick-access-panel,
+.menu-panel .quick-access-panel a,
+.menu-panel .quick-access-panel button {
+  border-radius: 0 !important;
+}
+
+.menu-panel a:hover,
+.menu-panel button:hover,
+.menu-panel .quick-access-panel a:hover,
+.menu-panel .quick-access-panel button:hover {
+  border-radius: 0 !important;
+}
+
 /* Search elements removed - let theme handle all search styling */
 
 /* ==============================
