@@ -992,6 +992,13 @@ body.categories-list a.subcategory:not(.with-subcategories) .badge-category__wra
   padding: 1em !important;
   margin: 0 !important;
   display: block !important;
+  border-radius: 0 !important;
+}
+
+/* Force all badge-category wrappers to have 0 border radius */
+.badge-category__wrapper,
+a .badge-category__wrapper {
+  border-radius: 0 !important;
 }
 
 /* Style the badge category content */
