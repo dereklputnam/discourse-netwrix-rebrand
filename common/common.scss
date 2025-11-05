@@ -235,6 +235,11 @@ body .select-kit .select-kit-header:not(.btn) {
   box-sizing: border-box;
 }
 
+/* Override Discourse's list-controls padding to ensure consistent spacing */
+.navigation-container {
+  padding: .75em !important;
+}
+
 .category-box,
 .category-box-inner,
 .category-boxes .category-box,
